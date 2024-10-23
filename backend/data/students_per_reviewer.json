@@ -1,0 +1,69 @@
+[
+    {
+        "name": "Tuan",
+        "color": { "mandatory": "crimson", "optional": "mistyrose" },
+        "students": [
+            "Marcos Nkwenti Cho", "Hoang Dang", "Amir Dehestani", "Marina Romero", "Mark Wernthaler",
+            "Preethi Sivakumar", "Veronica Martinez-Gallego", "Kevin Hoffmann", "Lina Dahlhaus",
+            "Jan-Philipp Gutt", "Christina Kloos", "Mohamad Kharata",
+            "Vladyslav Sakharnyi", "Evangelos Tsakoudis", "Sabahat Akcay", "Dolores Ramos",
+            "Félix Bote", "Maciej Nogaj", "Maria Lazareva", "Farshid mousavi", "Andreas Stoehr",
+            "Siwar Ibrahim", "Gerald Ezeani", "Andre Schumacher", "Victorine Mara Mbondi", "Pooja Singh",
+            "Dominik Valls",
+            "Reza Barzegar", "Helge Friedel",
+            "Mohammad Bayasi", "Ifeanyi Oraelosi", "Adrian Herzberger", "Alexander Kummerer",
+            "Divya Shahane", "Emanuele Napoli", "Alberto Ojeda", "Aruna Nadimpalli", "Ismail Mangal",
+            "Artem Vologdin", "Felix Torres", "Edina Adzem", "Ahmed Abdirisak", "Maria Fischer", "Ines Rahrah",
+            "Kamal Laarichi", "Yutaka Kobayashi", "Walter Cortes", "Elis Hnatiuk", "Antonio Guerrero",
+            "Varshabahen Rana", "Milos Tadic", "Mami Kurokawa", "Yadentra Mapuranga",
+            "Vasanthy Groney", "Mohammad Hiza", "Damien Lando", "Plamena Paskaleva", "Nebiel Mohammed",
+            "Jonas Happ", "Alireza Kargar", "Svea Schaefer"
+        ]
+    },
+    {
+        "name": "Nhung",
+        "color": { "mandatory": "royalblue", "optional": "cornflowerblue" },
+        "students": [
+            "Hadieh Bajestani", "Niveditha Pasumarthi", "Matthew Williams", "Piotr Kulbacki", "Sahelemariam Kitaw",
+            "Aroosha Basharat", "Welat Eren", "Hassnien Shreen", "Wendy Valbuena", "Karim Maged",
+            "Martin Reschke", "Akshay Satheesh", "Okan Sechrin", "Hameedullah Shirzay",
+            "Polina Vasiuk", "Lennart Zut", "Max Schmidt", "Ibrahim Bah", "Kimberly Canas",
+            "Lais Domiciano", "Maria-Cristina Fadgyas"
+        ]
+    },
+    {
+        "name": "Alejandro",
+        "color": { "mandatory": "seagreen", "optional": "lightseagreen" },
+        "students": [
+            "SairamVarma Gadiraju", "Gerardo Nolasco", "Yassine Aberchah", "Martin Kaiser", "Suma Hotti",
+            "Srimoyee Basu", "Marijana Iliev", "Xhefri Murati", "Essam Alshikh", "Johannes Schreiber", "Denys Lavrentiev",
+            "Salvis Are", "Asmamaw Yehun", "Maximilian Schmidt", "Manvir Kunar", "Igor de Albuquerque", "Ann Varghese",
+            "Ron McCoy", "Lydia Dijkstra", "Abdallah Sawaeer", "Manuel Putzu", "Saskia Sack", "Tom Alexander", "Tom Bunzel",
+            "Xiaoman Wu", "Alperen Yillikci", "Matthias Von mach", "Yevhen Kifiuk", "Narayan Ghimire", "Fatemeh Sohrabi",
+            "Yoann Claude", "Gerrit Hillebrecht", "Phillip Bauer", "Vashishth Shukla", "Sangamithra Muthamizhan", "Mohammed Al-Yassir",
+            "Sophie Houser", "Andriy Bulashov", "Miroslav Lucic", "Matthias Buettner", "Goran Csonkity", "Daniel Siebert"
+        ]
+    },
+    {
+        "name": "Shahriar",
+        "color": { "mandatory": "gray", "optional": "lightgray" },
+        "students": [
+            "Philipp Spitzley", "Grayson Earle", "Vitalii Ptichkin", "Gretchen Schadebrodt", "Jerome de Dios", "Love Okum",
+            "Abigail Conteh", "eike eckold", "Oscar Cardenas", "Lea von Freital", "Philipp Spitzley",
+            "Nikola Brajkovic", "Katharina Burchin", "Jana Albrecht", "Kenneth Meier", "Nico Wittemann", "Christian Lesemann",
+            "Benjamin Becker", "Marten Zöllner", "Lisa Koenen", "Felipe Pietzsch", "Volker Kolauch", "Michel Gaede",
+            "Hao Nguyen", "Tolga Uzun", "Florentine Moehrle", "Raza Ahmad", "David Unger", "Sukhrob Kadirov",
+            "James Balloqui", "Kwangu Silupya", "Erick Maruhn", "Mircea-Ionut Ardelean", "Katarina Sauder", "Elena Bai",
+            "Frederic Grignard", "Sam James", "Alireza Broujerdi", "Neringa Dijokaite", "Samantha Laguna"
+        ]
+    },
+    {
+        "name": "Tomer",
+        "color": { "mandatory": "darkgoldenrod", "optional": "beige" },
+        "students": [
+            "Natasha Teague", "Timothy McWilliams", "Martin Schneider", "Sahar Yasa", "jorge martinez",
+            "Dominik Peukert", "Ruchi Puri", "Juliana Trombetta", "Ronny Seidel", "Robin Juchems", "Md Alif Khondokar",
+            "Sivaneswaran Sutharsan", "Denis Englert", "Lutz Oschkinat", "Harutyun Saribekyan", "Mario Rose", "Simon Heinrich"
+        ]
+    }
+]
