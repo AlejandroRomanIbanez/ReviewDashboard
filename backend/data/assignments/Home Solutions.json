@@ -1,0 +1,32 @@
+[
+    {
+        "name": "tester tester",
+        "assignment_name": "Home Solutions",
+        "completed_date": "Sep 17th 2024 10:23pm",
+        "project_url": "No project URL"
+    },
+    {
+        "name": "Saskia Sack",
+        "assignment_name": "Home Solutions",
+        "completed_date": "Oct 23rd 2024 12:14pm",
+        "project_url": "No project URL"
+    },
+    {
+        "name": "Siwar Ibrahim",
+        "assignment_name": "Home Solutions",
+        "completed_date": "Oct 23rd 2024 5:21pm",
+        "project_url": "No project URL"
+    },
+    {
+        "name": "Kamal Laarichi",
+        "assignment_name": "Home Solutions",
+        "completed_date": "Oct 23rd 2024 11:07pm",
+        "project_url": "No project URL"
+    },
+    {
+        "name": "Matthias Buettner",
+        "assignment_name": "Home Solutions",
+        "completed_date": "Oct 24th 2024 9:24am",
+        "project_url": "No project URL"
+    }
+]

@@ -10,23 +10,25 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import StaleElementReferenceException, TimeoutException
+from concurrent.futures import ThreadPoolExecutor
 from webdriver_manager.chrome import ChromeDriverManager
 from dotenv import load_dotenv
-
+from assigments_urls import ASSIGNMENT_URLS
 
 load_dotenv()
-
 
 app = Flask(__name__)
 CORS(app)
 
-
 USERNAME = os.getenv("CODIO_USERNAME")
 PASSWORD = os.getenv("CODIO_PASSWORD")
 
-ASSIGNMENT_DATA_PATH = os.path.join(os.path.dirname(__file__), 'data', 'assignments_data.json')
+ASSIGNMENT_JSON_DIR = os.path.join(os.path.dirname(__file__), 'data', 'assignments')
 REVIEWER_DATA_PATH = os.path.join(os.path.dirname(__file__), 'data', 'students_per_reviewer.json')
+
+
+if not os.path.exists(ASSIGNMENT_JSON_DIR):
+    os.makedirs(ASSIGNMENT_JSON_DIR)
 
 chrome_options = Options()
 chrome_options.add_argument('--no-sandbox')
@@ -35,47 +37,19 @@ chrome_options.add_argument('--headless')
 chrome_options.add_argument('--disable-gpu')
 
 
-def scroll_to_element(element, driver):
-    driver.execute_script("arguments[0].scrollIntoView();", element)
-    time.sleep(2)
-
-
-def scroll_to_bottom(driver):
-    """Scrolls to the bottom of the page to ensure all elements are loaded."""
-    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-    time.sleep(2)
-
-
-def dismiss_cookie_consent(driver):
-    """Dismiss the cookie consent if the 'Got it' button appears on the page."""
-    try:
-        # Locate the "Got it" button by its text
-        got_it_button = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Got it')]"))
-        )
-        got_it_button.click()  # Click the "Got it" button
-        print("Cookie consent 'Got it' button clicked.")
-        time.sleep(2)  # Wait to ensure the button is dismissed
-    except TimeoutException:
-        print("No 'Got it' button found.")
-    except Exception as e:
-        print(f"Error dismissing 'Got it' button: {e}")
-
-
 def login(driver):
     try:
-        WebDriverWait(driver, 10).until(
+        WebDriverWait(driver, 20).until(
             EC.presence_of_element_located((By.XPATH, "(//input[@placeholder='Email or Username'])[1]"))
         ).send_keys(USERNAME)
 
         driver.find_element(By.XPATH, "(//input[@placeholder='Password'])[1]").send_keys(PASSWORD)
 
-        WebDriverWait(driver, 10).until(
+        WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.XPATH, "//button[@class='btn btn--primary btn--large']"))
         ).click()
 
-
-        WebDriverWait(driver, 10).until(
+        WebDriverWait(driver, 20).until(
             EC.presence_of_element_located((By.XPATH, "//div[@class='assignmentSmallList']"))
         )
         print("Login successful!")
@@ -85,7 +59,10 @@ def login(driver):
 
 def extract_grading_info(driver):
     try:
-        modal_title = driver.find_element(By.XPATH, "//div[@class='gradingModal-title'][1]").text.strip()
+        modal_title_element = WebDriverWait(driver, 20).until(
+            EC.presence_of_element_located((By.XPATH, "//div[@class='gradingModal-title'][1]"))
+        )
+        modal_title = modal_title_element.text.strip()
         modal_title = modal_title.replace("for ", "")
         if "'s " in modal_title:
             name, assignment_name = modal_title.split("'s ", 1)
@@ -93,12 +70,17 @@ def extract_grading_info(driver):
             name = modal_title
             assignment_name = "Unknown assignment name"
 
-        completed_date = driver.find_element(By.XPATH, "//div[@class='gradingModal-completedDate'][1]").text
-        completed_date = completed_date.replace("Completed date: ", "").strip()
+        # Wait for the completed date element to be present and visible
+        completed_date_element = WebDriverWait(driver, 20).until(
+            EC.presence_of_element_located((By.XPATH, "//div[@class='gradingModal-completedDate'][1]"))
+        )
+        completed_date = completed_date_element.text.replace("Completed date: ", "").strip()
 
         project_url = None
         try:
-            project_button = driver.find_element(By.XPATH, "//a[contains(text(), 'Open Project')]")
+            project_button = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.XPATH, "//a[contains(text(), 'Open Project')]"))
+            )
             project_url = project_button.get_attribute('href')
         except:
             project_url = "No project URL"
@@ -114,74 +96,65 @@ def extract_grading_info(driver):
         return None
 
 
-def scrape_assignments():
+def process_assignment_url(url):
+    """Process an individual assignment URL and save to a separate JSON file."""
     all_assignments = []
+
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
 
     try:
-        grading_queue_url = "https://codio.com/home/teacher/f6c6db9ebaca19737656cab4fe8cf722/grading-queue?assignmentId=0803f2e479409d35e5b3e11bdc4ff0aa"
-        driver.get(grading_queue_url)
-
+        driver.get(url)
         login(driver)
-        time.sleep(10)
-        dismiss_cookie_consent(driver)
+        time.sleep(5)
 
-        while True:
-            try:
-                assignment_elements = driver.find_elements(By.XPATH,
-                                                           "//tr[contains(@class,'assignmentSmallList-row')]//td[contains(@class,'assignmentSmallList-name')]")
-                print(f"Found {len(assignment_elements)} assignments.")
-                break
-            except StaleElementReferenceException:
-                print("Stale element found. Refetching assignment elements...")
-                time.sleep(2)
-                continue
+        empty_message = driver.find_elements(By.XPATH, "//span[@class='gradingQueue-emptyMessage']")
+        if empty_message:
+            print(f"No exercises in {url}. Skipping.")
+            return []
 
-        # Process each assignment element
-        for index in range(len(assignment_elements)):
-            try:
-                assignment_elements = driver.find_elements(By.XPATH,
-                                                           "//tr[contains(@class,'assignmentSmallList-row')]//td[contains(@class,'assignmentSmallList-name')]")
-                assignment_element = assignment_elements[index]
-                scroll_to_element(assignment_element, driver)  # Ensure element is visible before interaction
-                assignment_element.click()
-                time.sleep(2)
+        WebDriverWait(driver, 20).until(
+            EC.presence_of_element_located((By.XPATH, "//span[@title='Open grading dialog']"))
+        )
 
-                WebDriverWait(driver, 20).until(
-                    EC.presence_of_element_located((By.XPATH, "//span[@title='Open grading dialog']"))
-                )
+        grading_buttons = driver.find_elements(By.XPATH, "//span[@title='Open grading dialog']")
+        for button in grading_buttons:
+            button.click()
+            time.sleep(2)
 
-                grading_buttons = driver.find_elements(By.XPATH, "//span[@title='Open grading dialog']")
-                for button in grading_buttons:
-                    scroll_to_element(button, driver)
-                    button.click()
-                    time.sleep(2)
+            grading_info = extract_grading_info(driver)
+            if grading_info:
+                all_assignments.append(grading_info)
 
-                    grading_info = extract_grading_info(driver)
-                    if grading_info:
-                        all_assignments.append(grading_info)
+            close_button = driver.find_element(By.XPATH, "(//i[normalize-space()='close'])[1]")
+            close_button.click()
+            time.sleep(1)
 
-                    close_button = driver.find_element(By.XPATH, "(//i[normalize-space()='close'])[1]")
-                    close_button.click()
-                    time.sleep(1)
-
-                driver.back()
-                time.sleep(2)
-
-                # Scroll down after each interaction to ensure more elements are loaded
-                scroll_to_bottom(driver)
-
-            except Exception as e:
-                print(f"Error processing assignment {index + 1}: {e}")
-                continue
-
-        # Save the scraped data
-        with open(ASSIGNMENT_DATA_PATH, 'w') as json_file:
-            json.dump(all_assignments, json_file, indent=4)
+        if all_assignments:
+            assignment_name = all_assignments[0]['assignment_name']
+            safe_assignment_name = re.sub(r'[<>:"/\\|?*]', '_', assignment_name)
+            assignment_file = os.path.join(ASSIGNMENT_JSON_DIR, f"{safe_assignment_name}.json")
+            with open(assignment_file, 'w') as json_file:
+                json.dump(all_assignments, json_file, indent=4)
+            print(f"Saved data to {assignment_file}")
 
         return all_assignments
+    except Exception as e:
+        print(f"Error processing assignment at {url}: {e}")
+        return []
     finally:
         driver.quit()
+
+
+def scrape_assignments():
+    all_assignments = []
+    with ThreadPoolExecutor(max_workers=15) as executor:
+        futures = [executor.submit(process_assignment_url, url) for url in ASSIGNMENT_URLS]
+        for future in futures:
+            result = future.result()
+            if result:
+                all_assignments.extend(result)
+
+    return all_assignments
 
 
 @app.route('/scrape_assignments', methods=['GET'])
@@ -196,29 +169,42 @@ def scrape_assignments_route():
 @app.route('/show_assignments', methods=['GET'])
 def show_assignments():
     try:
-        with open(ASSIGNMENT_DATA_PATH, 'r') as json_file:
-            data = json.load(json_file)
-        return jsonify({"status": "success", "data": data}), 200
-    except FileNotFoundError:
-        return jsonify({"status": "error", "message": "No assignment data found. Please run the scraper first."}), 404
+        all_assignments = []
+        for filename in os.listdir(ASSIGNMENT_JSON_DIR):
+            if filename.endswith(".json"):
+                with open(os.path.join(ASSIGNMENT_JSON_DIR, filename), 'r') as json_file:
+                    data = json.load(json_file)
+                    all_assignments.extend(data)
+        return jsonify({"status": "success", "data": all_assignments}), 200
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
 
 
 @app.route('/exercises_per_reviewer/<reviewer_name>', methods=['GET'])
 def exercises_per_reviewer(reviewer_name):
     try:
+        # Load the reviewer to students mapping
         with open(REVIEWER_DATA_PATH, 'r') as reviewer_file:
             reviewer_data = json.load(reviewer_file)
 
+        # Find the reviewer and their assigned students
         reviewer = next((r for r in reviewer_data if r["name"].lower() == reviewer_name.lower()), None)
         if not reviewer:
             return jsonify({"status": "error", "message": f"Reviewer {reviewer_name} not found."}), 404
 
-        with open(ASSIGNMENT_DATA_PATH, 'r') as assignments_file:
-            assignments_data = json.load(assignments_file)
+        # Fetch assignments that match the students assigned to the reviewer
+        all_assignments = []
+        for filename in os.listdir(ASSIGNMENT_JSON_DIR):
+            if filename.endswith(".json"):
+                with open(os.path.join(ASSIGNMENT_JSON_DIR, filename), 'r') as json_file:
+                    assignment_data = json.load(json_file)
+                    filtered_assignments = [
+                        assignment for assignment in assignment_data if assignment['name'] in reviewer['students']
+                    ]
+                    all_assignments.extend(filtered_assignments)
 
-        filtered_assignments = [assignment for assignment in assignments_data if assignment['name'] in reviewer['students']]
+        return jsonify({"status": "success", "data": all_assignments}), 200
 
-        return jsonify({"status": "success", "data": filtered_assignments}), 200
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
 

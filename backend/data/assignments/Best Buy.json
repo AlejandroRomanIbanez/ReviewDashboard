@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Elena Bai",
+        "assignment_name": "Best Buy",
+        "completed_date": "Oct 19th 2024 2:05pm",
+        "project_url": "No project URL"
+    },
+    {
+        "name": "Matthew Williams",
+        "assignment_name": "Best Buy",
+        "completed_date": "Oct 21st 2024 11:02am",
+        "project_url": "No project URL"
+    },
+    {
+        "name": "Hassnien Shreen",
+        "assignment_name": "Best Buy",
+        "completed_date": "Oct 22nd 2024 10:52am",
+        "project_url": "No project URL"
+    },
+    {
+        "name": "Philipp Spitzley",
+        "assignment_name": "Best Buy",
+        "completed_date": "Oct 22nd 2024 3:17pm",
+        "project_url": "No project URL"
+    },
+    {
+        "name": "Mohammad Bayasi",
+        "assignment_name": "Best Buy",
+        "completed_date": "Oct 23rd 2024 5:23am",
+        "project_url": "No project URL"
+    },
+    {
+        "name": "Evangelos Tsakoudis",
+        "assignment_name": "Best Buy",
+        "completed_date": "Oct 24th 2024 5:50am",
+        "project_url": "No project URL"
+    }
+]
