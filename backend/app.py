@@ -195,17 +195,43 @@ def show_assignments():
 @app.route('/exercises_per_reviewer/<reviewer_name>', methods=['GET'])
 def exercises_per_reviewer(reviewer_name):
     try:
-        # Load the reviewer to students mapping
         with open(REVIEWER_DATA_PATH, 'r') as reviewer_file:
             reviewer_data = json.load(reviewer_file)
 
-        # Find the reviewer and their assigned students
+        all_reviewers_students = {
+            reviewer['name'].lower(): set(reviewer['students']) for reviewer in reviewer_data
+        }
+
+        if reviewer_name.lower() == "notassigned":
+            not_assigned_students = set()
+
+            for filename in os.listdir(ASSIGNMENT_JSON_DIR):
+                if filename.endswith(".json"):
+                    with open(os.path.join(ASSIGNMENT_JSON_DIR, filename), 'r') as json_file:
+                        assignment_data = json.load(json_file)
+                        for assignment in assignment_data:
+                            student_name = assignment['name']
+                            if student_name == "tester tester":
+                                continue
+                            if not any(student_name in students for students in all_reviewers_students.values()):
+                                not_assigned_students.add(student_name)
+
+            not_assigned_assignments = []
+            for filename in os.listdir(ASSIGNMENT_JSON_DIR):
+                if filename.endswith(".json"):
+                    with open(os.path.join(ASSIGNMENT_JSON_DIR, filename), 'r') as json_file:
+                        assignment_data = json.load(json_file)
+                        not_assigned_assignments.extend(
+                            assignment for assignment in assignment_data if assignment['name'] in not_assigned_students
+                        )
+
+            return jsonify({"status": "success", "data": not_assigned_assignments}), 200
+
         reviewer = next((r for r in reviewer_data if r["name"].lower() == reviewer_name.lower()), None)
         if not reviewer:
             return jsonify({"status": "error", "message": f"Reviewer {reviewer_name} not found."}), 404
 
-        # Fetch assignments that match the students assigned to the reviewer
-        all_assignments = []
+        reviewer_assignments = []
         for filename in os.listdir(ASSIGNMENT_JSON_DIR):
             if filename.endswith(".json"):
                 with open(os.path.join(ASSIGNMENT_JSON_DIR, filename), 'r') as json_file:
@@ -213,9 +239,32 @@ def exercises_per_reviewer(reviewer_name):
                     filtered_assignments = [
                         assignment for assignment in assignment_data if assignment['name'] in reviewer['students']
                     ]
-                    all_assignments.extend(filtered_assignments)
+                    reviewer_assignments.extend(filtered_assignments)
 
-        return jsonify({"status": "success", "data": all_assignments}), 200
+        return jsonify({"status": "success", "data": reviewer_assignments}), 200
+
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+
+@app.route('/unassigned_alert', methods=['GET'])
+def unassigned_alert():
+    try:
+        with open(REVIEWER_DATA_PATH, 'r') as reviewer_file:
+            reviewer_data = json.load(reviewer_file)
+
+        assigned_students = {student for reviewer in reviewer_data for student in reviewer['students']}
+
+        for filename in os.listdir(ASSIGNMENT_JSON_DIR):
+            if filename.endswith(".json"):
+                with open(os.path.join(ASSIGNMENT_JSON_DIR, filename), 'r') as json_file:
+                    assignment_data = json.load(json_file)
+                    for assignment in assignment_data:
+                        student_name = assignment['name']
+                        if student_name not in assigned_students and student_name.lower() != "tester tester":
+                            return jsonify({"alert": True}), 200
+
+        return jsonify({"alert": False}), 200
 
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500

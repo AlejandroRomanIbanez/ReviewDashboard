@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
 
@@ -7,10 +7,23 @@ const App = () => {
   const [assignments, setAssignments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [unassignedAlert, setUnassignedAlert] = useState(false);
 
-  const reviewers = ["Alejandro", "Tuan", "Nhung", "Shahriar", "Tomer"];
+  const reviewers = ["Alejandro", "Tuan", "Nhung", "Shahriar", "Tomer", "NotAssigned"];
   const base_url = "http://localhost:5000";
 
+  useEffect(() => {
+    // Check for unassigned students on component mount
+    const checkUnassignedAlert = async () => {
+      try {
+        const response = await axios.get(`${base_url}/unassigned_alert`);
+        setUnassignedAlert(response.data.alert);
+      } catch (error) {
+        console.error("Failed to fetch unassigned alert", error);
+      }
+    };
+    checkUnassignedAlert();
+  }, []);
 
   const fetchCodioData = async () => {
     setLoading(true);
@@ -25,7 +38,6 @@ const App = () => {
       console.error("Codio fetch error:", error);
     }
   };
-
 
   const parseDate = (dateString) => {
     const cleanDateString = dateString.replace(/(\d+)(st|nd|rd|th)/, "$1");
@@ -59,7 +71,6 @@ const App = () => {
     }
   };
 
-
   const handleReviewerChange = (e) => {
     setSelectedReviewer(e.target.value);
     setAssignments([]);
@@ -90,6 +101,9 @@ const App = () => {
       <div className="exercise-count">
         {assignments.length > 0 && (
           <p>Total Exercises for {selectedReviewer}: <span>{assignments.length}</span></p>
+        )}
+        {unassignedAlert && (
+          <p className="alert">⚠️ There are unassigned students</p>
         )}
       </div>
 
