@@ -1,3 +1,4 @@
+import hashlib
 import os
 import re
 import json
@@ -110,6 +111,11 @@ def process_assignment_url(url):
         empty_message = driver.find_elements(By.XPATH, "//span[@class='gradingQueue-emptyMessage']")
         if empty_message:
             print(f"No exercises in {url}. Skipping.")
+            # Delete any existing JSON file if this URL is skipped
+            assignment_file = os.path.join(ASSIGNMENT_JSON_DIR, f"{hashlib.md5(url.encode()).hexdigest()}.json")
+            if os.path.exists(assignment_file):
+                os.remove(assignment_file)
+                print(f"Deleted empty assignment file: {assignment_file}")
             return []
 
         WebDriverWait(driver, 20).until(
@@ -129,13 +135,19 @@ def process_assignment_url(url):
             close_button.click()
             time.sleep(1)
 
+        # Use the URL hash as the filename to ensure uniqueness and easy lookup
+        assignment_file = os.path.join(ASSIGNMENT_JSON_DIR, f"{hashlib.md5(url.encode()).hexdigest()}.json")
+
+        # Save data only if assignments exist, otherwise delete any existing file
         if all_assignments:
-            assignment_name = all_assignments[0]['assignment_name']
-            safe_assignment_name = re.sub(r'[<>:"/\\|?*]', '_', assignment_name)
-            assignment_file = os.path.join(ASSIGNMENT_JSON_DIR, f"{safe_assignment_name}.json")
             with open(assignment_file, 'w') as json_file:
                 json.dump(all_assignments, json_file, indent=4)
             print(f"Saved data to {assignment_file}")
+        else:
+            # Delete any stale file if this assignment has no exercises
+            if os.path.exists(assignment_file):
+                os.remove(assignment_file)
+                print(f"Deleted empty assignment file: {assignment_file}")
 
         return all_assignments
     except Exception as e:

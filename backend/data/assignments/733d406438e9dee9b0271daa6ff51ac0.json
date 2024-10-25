@@ -1,11 +1,5 @@
 [
     {
-        "name": "Phillip Bauer",
-        "assignment_name": "Masterblog",
-        "completed_date": "Oct 21st 2024 10:47pm",
-        "project_url": "No project URL"
-    },
-    {
         "name": "Mohammad Bayasi",
         "assignment_name": "Masterblog",
         "completed_date": "Oct 23rd 2024 3:10am",
@@ -15,6 +9,12 @@
         "name": "Marijana Iliev",
         "assignment_name": "Masterblog",
         "completed_date": "Oct 24th 2024 12:18am",
+        "project_url": "No project URL"
+    },
+    {
+        "name": "Phillip Bauer",
+        "assignment_name": "Masterblog",
+        "completed_date": "Oct 24th 2024 5:32pm",
         "project_url": "No project URL"
     }
 ]

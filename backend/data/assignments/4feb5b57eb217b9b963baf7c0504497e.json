@@ -1,11 +1,5 @@
 [
     {
-        "name": "Abdallah Sawaeer",
-        "assignment_name": "Titanic",
-        "completed_date": "Oct 11th 2024 10:45am",
-        "project_url": "No project URL"
-    },
-    {
         "name": "Farshid mousavi",
         "assignment_name": "Titanic",
         "completed_date": "Oct 21st 2024 11:25pm",
@@ -15,6 +9,12 @@
         "name": "Evangelos Tsakoudis",
         "assignment_name": "Titanic",
         "completed_date": "Oct 22nd 2024 12:33am",
+        "project_url": "No project URL"
+    },
+    {
+        "name": "Vitalii Ptichkin",
+        "assignment_name": "Titanic",
+        "completed_date": "Oct 24th 2024 9:53pm",
         "project_url": "No project URL"
     }
 ]
