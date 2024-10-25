@@ -3,24 +3,40 @@
         "name": "Mohammad Bayasi",
         "assignment_name": "Zootopia with API and Github",
         "completed_date": "Oct 22nd 2024 11:53am",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "crimson"
     },
     {
         "name": "Maciej Nogaj",
         "assignment_name": "Zootopia with API and Github",
         "completed_date": "Oct 23rd 2024 7:03am",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "crimson"
     },
     {
         "name": "Niveditha Pasumarthi",
         "assignment_name": "Zootopia with API and Github",
         "completed_date": "Oct 24th 2024 3:26pm",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "royalblue"
     },
     {
         "name": "Frederic Grignard",
         "assignment_name": "Zootopia with API and Github",
         "completed_date": "Oct 24th 2024 7:52pm",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "gray"
+    },
+    {
+        "name": "Matthias Buettner",
+        "assignment_name": "Zootopia with API and Github",
+        "completed_date": "Oct 25th 2024 9:50am",
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "seagreen"
     }
 ]

@@ -3,12 +3,16 @@
         "name": "Andriy Bulashov",
         "assignment_name": "Break The Substitution Cipher",
         "completed_date": "Oct 11th 2024 1:16pm",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "lightseagreen"
     },
     {
         "name": "Asmamaw Yehun",
         "assignment_name": "Break The Substitution Cipher",
         "completed_date": "Oct 14th 2024 10:22pm",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": true,
+        "color": "lightseagreen"
     }
 ]

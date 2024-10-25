@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
+import regradeIcon from './icons/regrade-icon.svg';
 
 const App = () => {
   const [selectedReviewer, setSelectedReviewer] = useState("");
@@ -97,7 +98,6 @@ const App = () => {
         </div>
       </header>
 
-      {/* Display total number of exercises */}
       <div className="exercise-count">
         {assignments.length > 0 && (
           <p>Total Exercises for {selectedReviewer}: <span>{assignments.length}</span></p>
@@ -122,9 +122,19 @@ const App = () => {
             </thead>
             <tbody>
               {assignments.map((assignment, index) => (
-                <tr key={index}>
+                <tr key={index} style={{ backgroundColor: assignment.color }}>
                   <td>{assignment.name}</td>
-                  <td>{assignment.assignment_name}</td>
+                  <td>
+                    {assignment.assignment_name}
+                    {assignment.regrade && (
+                      <img
+                        src={regradeIcon}
+                        alt="Regrade Request"
+                        title="Regrade Request"
+                        style={{ marginLeft: "8px", width: "20px", verticalAlign: "middle" }}
+                      />
+                    )}
+                  </td>
                   <td>{assignment.completed_date}</td>
                   <td>{selectedReviewer}</td>
                 </tr>

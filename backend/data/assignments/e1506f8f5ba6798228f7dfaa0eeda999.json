@@ -3,6 +3,8 @@
         "name": "tester tester",
         "assignment_name": "JavaScript Practice",
         "completed_date": "Oct 16th 2024 12:51pm",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "default_color"
     }
 ]

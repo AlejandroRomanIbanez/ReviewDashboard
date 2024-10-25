@@ -71,6 +71,11 @@ def extract_grading_info(driver):
             name = modal_title
             assignment_name = "Unknown assignment name"
 
+        regrade_element = driver.find_elements(By.XPATH, "(//legend[normalize-space()='Regrade Request'])[1]")
+        is_regrade = bool(regrade_element)
+
+        color = get_color_for_student(name.strip(), assignment_name.strip())
+
         # Wait for the completed date element to be present and visible
         completed_date_element = WebDriverWait(driver, 20).until(
             EC.presence_of_element_located((By.XPATH, "//div[@class='gradingModal-completedDate'][1]"))
@@ -90,8 +95,11 @@ def extract_grading_info(driver):
             'name': name.strip(),
             'assignment_name': assignment_name.strip(),
             'completed_date': completed_date,
-            'project_url': project_url
+            'project_url': project_url,
+            'regrade': is_regrade,
+            'color': color
         }
+
     except Exception as e:
         print(f"Error extracting data from modal: {e}")
         return None
@@ -167,6 +175,23 @@ def scrape_assignments():
                 all_assignments.extend(result)
 
     return all_assignments
+
+
+def get_color_for_student(student_name, assignment_name):
+    """Returns the color based on student and regrade status."""
+    optional_assignments = [
+        "Nested Looping", "Aggregate The Log File", "21 Sticks",
+        "Caesar Cipher", "Break The Caesar Cipher", "Break The Substitution Cipher"
+    ]
+    with open(REVIEWER_DATA_PATH, 'r') as reviewer_file:
+        reviewer_data = json.load(reviewer_file)
+        for reviewer in reviewer_data:
+            if student_name in reviewer['students']:
+                if assignment_name in optional_assignments:
+                    return reviewer['color']['optional']
+                else:
+                    return reviewer['color']['mandatory']
+    return "default_color"
 
 
 @app.route('/scrape_assignments', methods=['GET'])

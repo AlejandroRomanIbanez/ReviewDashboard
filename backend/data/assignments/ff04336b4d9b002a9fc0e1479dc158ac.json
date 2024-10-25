@@ -3,24 +3,40 @@
         "name": "Preethi Sivakumar",
         "assignment_name": "Movie Project - Phase 1 - Fast Track",
         "completed_date": "Oct 22nd 2024 9:03pm",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "crimson"
     },
     {
         "name": "Dominik Peukert",
         "assignment_name": "Movie Project - Phase 1 - Fast Track",
         "completed_date": "Oct 24th 2024 2:35am",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "darkgoldenrod"
     },
     {
         "name": "Jerome de Dios",
         "assignment_name": "Movie Project - Phase 1 - Fast Track",
         "completed_date": "Oct 24th 2024 2:41pm",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "gray"
     },
     {
         "name": "Kenneth Meier",
         "assignment_name": "Movie Project - Phase 1 - Fast Track",
         "completed_date": "Oct 24th 2024 10:35pm",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "gray"
+    },
+    {
+        "name": "Michel Gaede",
+        "assignment_name": "Movie Project - Phase 1 - Fast Track",
+        "completed_date": "Oct 25th 2024 10:24am",
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "gray"
     }
 ]

@@ -3,12 +3,16 @@
         "name": "Mohammad Bayasi",
         "assignment_name": "Best Buy 2.0",
         "completed_date": "Oct 23rd 2024 5:25am",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "crimson"
     },
     {
         "name": "Andriy Bulashov",
         "assignment_name": "Best Buy 2.0",
         "completed_date": "Oct 24th 2024 11:40am",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "seagreen"
     }
 ]

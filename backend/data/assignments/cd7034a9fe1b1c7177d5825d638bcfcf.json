@@ -3,18 +3,24 @@
         "name": "Max Schmidt",
         "assignment_name": "Book Alchemy",
         "completed_date": "Oct 9th 2024 11:28pm",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": true,
+        "color": "royalblue"
     },
     {
         "name": "Mohammad Bayasi",
         "assignment_name": "Book Alchemy",
         "completed_date": "Oct 23rd 2024 4:20am",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "crimson"
     },
     {
         "name": "Artem Vologdin",
         "assignment_name": "Book Alchemy",
         "completed_date": "Oct 25th 2024 8:05am",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": true,
+        "color": "crimson"
     }
 ]

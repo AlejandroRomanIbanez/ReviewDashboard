@@ -3,18 +3,24 @@
         "name": "Alireza Broujerdi",
         "assignment_name": "Help Your Teacher 2",
         "completed_date": "Oct 23rd 2024 10:36am",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "gray"
     },
     {
         "name": "Katarina Sauder",
         "assignment_name": "Help Your Teacher 2",
         "completed_date": "Oct 24th 2024 9:56am",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": true,
+        "color": "gray"
     },
     {
         "name": "Hao Nguyen",
         "assignment_name": "Help Your Teacher 2",
         "completed_date": "Oct 24th 2024 11:56pm",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "gray"
     }
 ]

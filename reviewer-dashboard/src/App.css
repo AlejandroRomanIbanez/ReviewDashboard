@@ -113,6 +113,18 @@ thead {
   color: white;
 }
 
+.assignments-table table tbody tr {
+  color: #fff;
+}
+
+.assignments-table table tbody tr td {
+  color: #333;
+}
+
+.alert {
+  color: #d9534f;
+}
+
 .error {
   color: red;
   font-size: 16px;

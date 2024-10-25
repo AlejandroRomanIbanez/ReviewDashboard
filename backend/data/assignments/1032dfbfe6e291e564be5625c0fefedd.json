@@ -3,18 +3,24 @@
         "name": "tester tester",
         "assignment_name": "Nested Looping",
         "completed_date": "Aug 18th 2024 5:30pm",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "default_color"
     },
     {
         "name": "Andriy Bulashov",
         "assignment_name": "Nested Looping",
         "completed_date": "Oct 10th 2024 1:44pm",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": true,
+        "color": "lightseagreen"
     },
     {
         "name": "Marijana Iliev",
         "assignment_name": "Nested Looping",
         "completed_date": "Oct 10th 2024 10:48pm",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": true,
+        "color": "lightseagreen"
     }
 ]

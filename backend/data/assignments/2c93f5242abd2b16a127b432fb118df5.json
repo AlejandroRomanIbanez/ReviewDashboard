@@ -3,24 +3,32 @@
         "name": "tester tester",
         "assignment_name": "Romeo And Juliet",
         "completed_date": "Oct 16th 2024 2:26pm",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "default_color"
     },
     {
         "name": "Jana Albrecht",
         "assignment_name": "Romeo And Juliet",
         "completed_date": "Oct 23rd 2024 9:40am",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "gray"
     },
     {
         "name": "Gerardo Nolasco",
         "assignment_name": "Romeo And Juliet",
         "completed_date": "Oct 23rd 2024 10:01am",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "seagreen"
     },
     {
         "name": "Felipe Pietzsch",
         "assignment_name": "Romeo And Juliet",
         "completed_date": "Oct 23rd 2024 2:55pm",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "gray"
     }
 ]

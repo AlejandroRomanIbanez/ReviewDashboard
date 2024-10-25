@@ -3,18 +3,24 @@
         "name": "Mohammad Bayasi",
         "assignment_name": "Best Buy",
         "completed_date": "Oct 23rd 2024 5:23am",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "crimson"
     },
     {
         "name": "Evangelos Tsakoudis",
         "assignment_name": "Best Buy",
         "completed_date": "Oct 24th 2024 5:50am",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "crimson"
     },
     {
         "name": "Ron McCoy",
         "assignment_name": "Best Buy",
         "completed_date": "Oct 24th 2024 11:32pm",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "seagreen"
     }
 ]

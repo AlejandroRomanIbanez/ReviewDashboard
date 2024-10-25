@@ -3,6 +3,8 @@
         "name": "Ron McCoy",
         "assignment_name": "21 Sticks",
         "completed_date": "Oct 15th 2024 12:49pm",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "lightseagreen"
     }
 ]

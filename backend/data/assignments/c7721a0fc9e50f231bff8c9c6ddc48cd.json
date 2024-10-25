@@ -3,12 +3,16 @@
         "name": "Mohammad Bayasi",
         "assignment_name": "Masterblog API",
         "completed_date": "Oct 23rd 2024 3:16am",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "crimson"
     },
     {
         "name": "Phillip Bauer",
         "assignment_name": "Masterblog API",
         "completed_date": "Oct 23rd 2024 2:57pm",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "seagreen"
     }
 ]

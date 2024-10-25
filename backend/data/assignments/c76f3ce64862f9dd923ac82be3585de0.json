@@ -1,8 +1,18 @@
 [
     {
+        "name": "Marijana Iliev",
+        "assignment_name": "Movie Project - OOP + Web",
+        "completed_date": "Oct 22nd 2024 11:55pm",
+        "project_url": "No project URL",
+        "regrade": true,
+        "color": "seagreen"
+    },
+    {
         "name": "Mohammad Bayasi",
         "assignment_name": "Movie Project - OOP + Web",
         "completed_date": "Oct 23rd 2024 2:56am",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "crimson"
     }
 ]

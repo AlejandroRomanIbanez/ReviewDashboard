@@ -3,18 +3,24 @@
         "name": "Mohammad Bayasi",
         "assignment_name": "Masterblog",
         "completed_date": "Oct 23rd 2024 3:10am",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "crimson"
     },
     {
         "name": "Marijana Iliev",
         "assignment_name": "Masterblog",
         "completed_date": "Oct 24th 2024 12:18am",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "seagreen"
     },
     {
         "name": "Phillip Bauer",
         "assignment_name": "Masterblog",
         "completed_date": "Oct 24th 2024 5:32pm",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": true,
+        "color": "seagreen"
     }
 ]

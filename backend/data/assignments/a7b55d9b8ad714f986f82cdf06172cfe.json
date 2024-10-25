@@ -3,36 +3,32 @@
         "name": "Katarina Sauder",
         "assignment_name": "Project Part 1",
         "completed_date": "Oct 23rd 2024 11:31am",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": true,
+        "color": "gray"
     },
     {
         "name": "Abigail Conteh",
         "assignment_name": "Project Part 1",
         "completed_date": "Oct 24th 2024 1:00pm",
-        "project_url": "No project URL"
-    },
-    {
-        "name": "Marina Romero",
-        "assignment_name": "Project Part 1",
-        "completed_date": "Oct 24th 2024 4:10pm",
-        "project_url": "No project URL"
-    },
-    {
-        "name": "Ruchi Puri",
-        "assignment_name": "Project Part 1",
-        "completed_date": "Oct 24th 2024 9:39pm",
-        "project_url": "No project URL"
-    },
-    {
-        "name": "Jan-Philipp Gutt",
-        "assignment_name": "Project Part 1",
-        "completed_date": "Oct 25th 2024 8:35am",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "gray"
     },
     {
         "name": "Martin Schneider",
         "assignment_name": "Project Part 1",
         "completed_date": "Oct 25th 2024 9:26am",
-        "project_url": "No project URL"
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "darkgoldenrod"
+    },
+    {
+        "name": "Jana Albrecht",
+        "assignment_name": "Project Part 1",
+        "completed_date": "Oct 25th 2024 12:30pm",
+        "project_url": "No project URL",
+        "regrade": false,
+        "color": "gray"
     }
 ]
